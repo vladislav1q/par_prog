@@ -5,6 +5,9 @@
 long int fact(int n);
 long double my_pow(double x, int n);
 
+//This function calculates taylor series of exp(x)
+//Input argument is the number of elements in sum
+
 int main(int argc, char** argv) {
     int n_elements = atoi(argv[1]);
     long double Sum = 0;
@@ -19,11 +22,15 @@ int main(int argc, char** argv) {
 
         double start = omp_get_wtime();
 
+        //calculation of full sum is divided into calculating
+        //each range of elements independently
         #pragma omp for schedule(static)
         for (int i = 0; i <= n_elements; i++) {
             results[id] += my_pow(x,i)/fact(i);
         }
 
+        //On the main process we combine all sums
+        //resulted from parallel execution
         if(id == 0){
             for (int i = 0; i < n_threads; i++) {
                 Sum += results[i];
