@@ -14,7 +14,7 @@
 struct number {
     int value;
     int prime_flag;
-} number={0,1};
+} number={1,1};
 
 struct prime_numbers {
     int *values;
@@ -27,14 +27,14 @@ void get_primes(struct number * numbers, struct prime_numbers *primeNumbers, int
 int main(int argc, char **argv){
     int prime_numbers_count = 0;
     int N = atoi(argv[1]);
-    int N_sequent = sqrt(N) + 1;
+    int N_sequent = sqrt(N)+1;
 
     //initialization
     struct prime_numbers primeNumbers;
     primeNumbers.values = malloc(N_sequent*sizeof(int));
     primeNumbers.size = 0;
     struct number * numbers = malloc(N * sizeof(number));
-    for (int i = 0; i <= N; i++) {
+    for (int i = 0; i < N-1; i++) {
         numbers[i].value = i+2;
         numbers[i].prime_flag = 1;
     }
