@@ -1,0 +1,10 @@
+f = open("results.txt", "r")
+
+degree = 20
+
+vals = [];
+for i in f.read().split():
+    vals.append(float(i))
+print(len(np.arange(-10,10+20/2**degree,20/2**degree)))
+print(len(vals))
+plt.plot(np.arange(-10,10+20/2**degree,20/2**degree),vals)
